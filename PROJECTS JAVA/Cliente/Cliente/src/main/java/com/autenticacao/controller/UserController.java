@@ -2,6 +2,7 @@ package com.autenticacao.controller;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,9 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Boolean> validation(@RequestBody User sender, @RequestParam BigDecimal value) {
-        return ResponseEntity.ok(userService.validation(sender, value));
+    public ResponseEntity<Object> validation(@RequestBody User sender, @RequestParam BigDecimal value) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.validation(sender, value)) ; 
+        
     }
 
     @GetMapping("/hello")
